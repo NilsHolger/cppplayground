@@ -3,20 +3,27 @@
 #include <vector>
 #include <algorithm>
 #include <random>
+#include <sstream>
 #include "geometry.h"
 using namespace std;
 
-string multichoiceinit(int in){
-	const string s1 = [&](){
-		switch (in){
-		case 0: return "0 Arguments";
-		case 1: return "1 Argument";
-		default: return "Many Arguments";
-		}
-	}();
-	return s1;
-}
+class Particle {
+public:
+	Particle(int id, string description) : m_id(id), m_description(move(description)) {}
+	string description() const { return m_description; }
+private:
+	int m_id = 0;
+	string m_description;
+	int m_x_velocity = 0;
+	int m_y_velocity = 0;
+};
 
 int main(){
-	cout << multichoiceinit(1) << "\n";
+	vector<Particle> particles;
+	for (int i = 0; i < 10; ++i){
+		particles.emplace_back(i, "ID: " + to_string(i));
+	}
+	for (const auto &p : particles){
+		cout << "Particle: " << p.description() << "\n";
+	}
 }
