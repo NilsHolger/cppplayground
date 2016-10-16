@@ -12,16 +12,14 @@
 #include <array>
 using namespace std;
 
-template<typename T>
-void print_elements(const T &items){
-	for (const auto &e : items){
-		cout << e << "\n";
-	}
-}
+struct MyClass {
+	string s = "she has a sexy string.";
+
+};
 
 int main(){
-	array<int, 3> ints{ { 3, 2, 1 } };
-	array<string, 6> strings{ { "she", "has", "the", "sexiest", "string", "!" } };
-	array<char, 3> chars{ { 'a', 'b', 'c' } };
-	print_elements(chars);
+	void *p = malloc(sizeof(MyClass));
+	MyClass *o = new (p)MyClass();
+	cout << o->s << "\n";
+	free(p);
 }							 
