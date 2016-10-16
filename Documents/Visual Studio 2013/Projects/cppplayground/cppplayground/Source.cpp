@@ -9,9 +9,8 @@ using namespace std;
 int main(){
 	const string s1 = "she has a sexy string"; 
 	const auto num_ss = count(begin(s1), end(s1), 's');
-	const vector<string> postfixes = { "1", "2", "3" };
 	int total_length = 0;
-	for (const auto &postfix : postfixes){
+	for (const auto &postfix : { "1", "2", "3" }){
 		const auto appended = s1 + postfix;
 		total_length += appended.size();
 	}
