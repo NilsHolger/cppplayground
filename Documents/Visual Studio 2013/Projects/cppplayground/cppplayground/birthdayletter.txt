@@ -1,0 +1,11 @@
+Dear $name,													$date
+
+Thank you for the $present. I really like it. I can't believe I'm
+already $age years old, but it doesn't feel that much different
+than being $age-1. I hope that sometime in the next year we can 
+come visit you in $city.
+
+Thank you again for the $present.
+
+Sincereley,
+$yourName

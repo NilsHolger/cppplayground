@@ -7,25 +7,42 @@
 #include <chrono>
 #include "geometry.h"
 #include "windows.h"
+#include <cmath>
+#include <memory>
 using namespace std;
-
-struct Timer {
-	const chrono::time_point<chrono::system_clock> start = chrono::system_clock::now();
-	~Timer(){
-		cout << chrono::duration<double>{chrono::system_clock::now() - start}.count() << "s\n";
-	}
+struct Base {
+	virtual int do_something() = 0;
+	virtual ~Base() = default;
+	Base() = default;
+	//Base(Base &&) = default;
+	Base(const Base &) = default;
+	//Base& operator = (Base &&) = default;
+	Base& operator = (const Base &) = default;
 };
-bool complex_calculation() {
-	//perform a complex calculation here
-	Sleep(500);
-	return true;
-}
-int main(){
-	Timer t;
-	if (complex_calculation()){
-		return EXIT_SUCCESS;
+
+struct Derived : Base {
+	virtual int do_something() override {
+		return value++;
 	}
-	else {
-		return EXIT_FAILURE;
+	int value = 10;
+};
+
+struct Derived2 : Base {
+	virtual int do_something() override {
+		return value += 1;
+	}
+	int value = 100;
+};
+
+int main(){
+		
+	vector<shared_ptr<Base>> objs;
+
+	for (int i = 0; i < 1000; i++){
+		objs.push_back(make_shared<Derived>());
+		objs.push_back(make_shared<Derived2>());
+	}
+	for (const auto &o : objs){
+		cout << o->do_something() << "\n";
 	}
 }
