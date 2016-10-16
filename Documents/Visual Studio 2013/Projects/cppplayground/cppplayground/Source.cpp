@@ -13,13 +13,11 @@
 using namespace std;
 
 struct MyClass {
-	string s = "she has a sexy string.";
-
+	string s = "hello world";
 };
 
 int main(){
-	void *p = malloc(sizeof(MyClass));
-	MyClass *o = new (p)MyClass();
+	MyClass *o = new MyClass();
 	cout << o->s << "\n";
-	free(p);
+	delete o;
 }							 
