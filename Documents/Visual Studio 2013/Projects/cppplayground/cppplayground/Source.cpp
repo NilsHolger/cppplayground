@@ -6,13 +6,15 @@
 #include "geometry.h"
 using namespace std;
 
+struct S_Counter {
+	S_Counter(string t_s):
+		s(move(t_s)),
+		num_ss(count(s.begin(), s.end(), 's')) {}
+	const string s;
+	const int num_ss;
+};
+
 int main(){
 	const string s1 = "she has a sexy string"; 
-	const auto num_ss = count(begin(s1), end(s1), 's');
-	int total_length = 0;
-	for (const auto &postfix : { "1", "2", "3" }){
-		const auto appended = s1 + postfix;
-		total_length += appended.size();
-	}
-	cout << "count s " << num_ss << "\n" << "total length " << total_length << "\n"; // 4 66
+	cout << S_Counter(s1).num_ss << "\t" << S_Counter(s1).s << "\n";
 }
