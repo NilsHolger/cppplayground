@@ -8,25 +8,16 @@ using namespace std;
 
 
 int main(){
-	vector<int> v1;
-	vector<int> v2;
+	vector<int> v1, v2;
 	random_device rd;
 	mt19937 gen(rd());
 	uniform_int_distribution<> dis(1, 100);
-
-	for (int i = 0; i < 100; ++i){
-		v1.push_back(dis(gen));
-		v2.push_back(dis(gen));
-	}
+	generate_n(back_inserter(v1), 100, [&]() { return dis(gen); });
+	generate_n(back_inserter(v2), 100, [&]() { return dis(gen); });
 	vector<int> in_both;
-	for (const auto i : v1){
-		for (const auto j : v2){
-			if (i == j){
-				in_both.push_back(j);
-				break;
-			}
-		}
-	}
+	sort(begin(v1), end(v1));
+	sort(begin(v2), end(v2));
+	set_intersection(begin(v1), end(v1), begin(v2), end(v2), back_inserter(in_both));
 	for (const auto i : in_both){
 		cout << i << ", ";
 	}
