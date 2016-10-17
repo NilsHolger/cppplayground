@@ -13,26 +13,20 @@
 #include <map>
 using namespace std;
 
-class Person {
-public:
-	Person() { cout << "person constructor\n"; }
-	~Person() { cout << "person destructor\n"; }
-	void UsePerson() { cout << "useperson()\n"; }
+struct Object {
+	shared_ptr<int> i = make_shared<int>(1);
+	void update_value(){
+		if (*i < 2) i = make_shared<int>(3);
+	}
+	static void print(const int t_i){ cout << t_i << "\n"; }
+	void use_value(){
+		//const auto local_i = i;
+		update_value();
+		print(*i);
+	}
 };
 
-void DoIt(const Person &){
-	cout << "in doit()\n";
-}
-
 int main(){
-	unique_ptr<Person> p1(new Person);
-	if (p1){p1->UsePerson();}
-	DoIt(*p1);
-	{
-		unique_ptr<Person> p2(move(p1));
-		DoIt(*p2);
-		p1 = move(p2);
-		cout << "p2 goes out of scope\n";
-	}
-	if (p1) { p1->UsePerson(); }
+	Object o;
+	o.use_value();
 }							 
