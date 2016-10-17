@@ -11,22 +11,18 @@
 #include <memory>
 #include <array>
 #include <map>
+#include <list>
 using namespace std;
 
-struct Object {
-	shared_ptr<int> i = make_shared<int>(1);
-	void update_value(){
-		if (*i < 2) i = make_shared<int>(3);
-	}
-	static void print(const int t_i){ cout << t_i << "\n"; }
-	void use_value(){
-		//const auto local_i = i;
-		update_value();
-		print(*i);
-	}
-};
 
 int main(){
-	Object o;
-	o.use_value();
+	int count; list<string> words;
+	words.push_back("she"); words.push_back("has"); words.push_back("a"); words.push_back("sexy"); words.push_back("string");
+	count = 0;
+	for (list<string>::const_iterator itr = words.begin(); itr != words.end(); ++itr){
+		for (int j = 0; j < static_cast<int>(itr->size()); ++j){
+			if ((*itr)[j] == 's'){ ++count; }
+		}
+	}
+	cout << count << "\n";
 }							 
