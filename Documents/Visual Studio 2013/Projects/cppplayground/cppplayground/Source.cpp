@@ -14,15 +14,21 @@
 #include <list>
 using namespace std;
 
+struct Object {
+	Object() = default;
+	virtual ~Object() = default;
+	Object(const Object &) = default;
+	Object &operator  = (const Object&) = default;
+	//Object(Object &&) = default;
+	//Object &operator =(Object&&) = default;
+	virtual int value() { return 10; }
+};
+struct Derived : Object {
+	virtual int value() override { return 100; }
+};
+
 
 int main(){
-	int count; list<string> words;
-	words.push_back("she"); words.push_back("has"); words.push_back("a"); words.push_back("sexy"); words.push_back("string");
-	count = 0;
-	for (list<string>::const_iterator itr = words.begin(); itr != words.end(); ++itr){
-		for (int j = 0; j < static_cast<int>(itr->size()); ++j){
-			if ((*itr)[j] == 's'){ ++count; }
-		}
-	}
-	cout << count << "\n";
+	auto o = make_unique<Derived>();
+	cout << o->value() << "\n";
 }							 
