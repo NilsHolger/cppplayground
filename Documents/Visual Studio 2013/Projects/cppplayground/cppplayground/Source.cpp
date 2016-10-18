@@ -4,7 +4,7 @@
 using namespace std;
 
 class Employee {
-private:
+protected:
 	string name;
 	double pay;
 public:
@@ -28,6 +28,9 @@ public:
 	void setPay(double payRate){
 		pay = payRate;
 	}
+	double grossPay(double hours) {
+		return pay * hours;
+	}
 	string toString() {
 		stringstream stm;
 		stm << name << ": " << pay;
@@ -44,11 +47,13 @@ public:
 	bool getSalaried(){
 		return salaried;
 	}
+	double grossPay(){
+		return pay;
+	}
 };
 int main(){
-	Employee emp1("Jane Smith", 35000);
-	cout << emp1.toString() << "\n";
+	Employee emp1("Jane Smith", 50.01);
+	cout << emp1.toString() << " " << emp1.grossPay(100.01) << "\n";
 	Manager man1("Joe Blow", 50000, true);
-	cout << man1.toString() << " " << man1.getSalaried() << "\n";
-
+	cout << man1.toString() << " " << man1.grossPay() << " " << man1.getSalaried() << "\n";
 }							 
