@@ -1,56 +1,83 @@
 #include <string>
 #include <iostream>
 #include <sstream>
+#include <vector>
 using namespace std;
 
-class Account {
+class Employee {
 protected:
-	double balance;
+	string name;
+	double pay;
 public:
-	Account(double bal){
-		if (bal > 0){
-			balance = bal;
-		}
-		else {
-			bal = 0.0;
-		}
+	Employee(){
+		name = "";
+		pay = 0;
 	}
-	~Account() {}
-	void credit(double amount){
-		balance += amount;
+	Employee(string empName, double payRate){
+		name = empName;
+		pay = payRate;
 	}
-	void debit(double amount){
-		if (balance > amount){
-			balance -= amount;
-		}
-		else {
-			cout << "Insufficient funds." << "\n";
-		}
+	~Employee() {}
+	string getName(){
+		return name;
 	}
-	double getBalance() {
-		return balance;
+	void setName(string empName){
+		name = empName;
+	}
+	double getPay(){
+		return pay;
+	}
+	void setPay(double payRate){
+		pay = payRate;
+	}
+	virtual double grossPay(double hours) {
+		return pay * hours;
+	}
+	string toString() {
+		stringstream stm;
+		stm << name << ": " << pay;
+		return stm.str();
 	}
 };
-class CheckingAccount : public Account {
+class Manager : public Employee {
 private:
-	double fee;
+	bool salaried;
 public:
-	CheckingAccount(double bal, double f) : Account(bal)	{ fee = f; }
-	~CheckingAccount() {}
-	void debit(double amount){
-		if (balance > amount){
-			balance = balance - amount - fee;
+	Manager() : salaried(true) {}
+	Manager(string name, double payRate, bool isSalaried) : Employee(name, payRate) {
+		salaried = isSalaried;
+	}
+	~Manager() {}
+	bool getSalaried(){
+		return salaried;
+	}
+	virtual double grossPay(double hours){
+		if (salaried){
+			return pay;
 		}
 		else {
-			cout << "Insufficient funds." << "\n";
+			return pay * hours;
 		}
+	}
+	string toString() {
+		stringstream stm;
+		string salary;
+		if (salaried){
+			salary = "Salaried";
+		}
+		else {
+			salary = "Hourly";
+		}
+		stm << name << ": " << pay << " " << salary;
+		return stm.str();
 	}
 };
 int main(){
-	CheckingAccount myacct(1000, 1.01);
-	myacct.credit(100);
-	cout << myacct.getBalance() << "\n"; //1100
-	myacct.debit(10); 
-	cout << myacct.getBalance() << "\n"; //1088.99
-	return 0;
-}							 
+	vector<Employee*> emps;
+	Employee emp1("Jane", 10.01);
+	Manager man1("Bob", 1000.01, true);
+	emps.push_back(&emp1); emps.push_back(&man1);
+	for (int i = 0; i < emps.size(); ++i){
+		cout << emps[i]->grossPay(100) << "\n";
+	}
+}
