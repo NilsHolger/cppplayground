@@ -3,81 +3,54 @@
 #include <sstream>
 using namespace std;
 
-class Employee {
+class Account {
 protected:
-	string name;
-	double pay;
+	double balance;
 public:
-	Employee(){
-		name = "";
-		pay = 0;
+	Account(double bal){
+		if (bal > 0){
+			balance = bal;
+		}
+		else {
+			bal = 0.0;
+		}
 	}
-	Employee(string empName, double payRate){
-		name = empName;
-		pay = payRate;
+	~Account() {}
+	void credit(double amount){
+		balance += amount;
 	}
-	~Employee() {
-		//do something here
+	void debit(double amount){
+		if (balance > amount){
+			balance -= amount;
+		}
+		else {
+			cout << "Insufficient funds." << "\n";
+		}
 	}
-	string getName(){
-		return name;
-	}
-	void setName(string empName){
-		name = empName;
-	}
-	double getPay(){
-		return pay;
-	}
-	void setPay(double payRate){
-		pay = payRate;
-	}
-	double grossPay(double hours) {
-		return pay * hours;
-	}
-	string toString() {
-		stringstream stm;
-		stm << name << ": " << pay;
-		return stm.str();
+	double getBalance() {
+		return balance;
 	}
 };
-class Manager : public Employee {
+class CheckingAccount : public Account {
 private:
-	bool salaried;
+	double fee;
 public:
-	Manager() : salaried(true) {}
-	Manager(string name, double payRate, bool isSalaried) : Employee(name, payRate) {
-		salaried = isSalaried;
-	}
-	~Manager() {
-		//free allocated resources
-	}
-	bool getSalaried(){
-		return salaried;
-	}
-	double grossPay(int hours = 0){
-		if (salaried){
-			return pay;
+	CheckingAccount(double bal, double f) : Account(bal)	{ fee = f; }
+	~CheckingAccount() {}
+	void debit(double amount){
+		if (balance > amount){
+			balance = balance - amount - fee;
 		}
 		else {
-			return pay * hours;
+			cout << "Insufficient funds." << "\n";
 		}
-	}
-	string toString() {
-		stringstream stm;
-		string salary;
-		if (salaried){
-			salary = "Salaried";
-		}
-		else {
-			salary = "Hourly";
-		}
-		stm << name << ": " << pay << " " << salary;
-		return stm.str();
 	}
 };
 int main(){
-	Employee emp1("Jane Smith", 50.01);
-	cout << emp1.toString() << " " << emp1.grossPay(100.01) << "\n";
-	Manager man1("Joe Blow", 50000, true);
-	cout << man1.toString() << " " << man1.grossPay() << " " << man1.getSalaried() << "\n";
+	CheckingAccount myacct(1000, 1.01);
+	myacct.credit(100);
+	cout << myacct.getBalance() << "\n"; //1100
+	myacct.debit(10); 
+	cout << myacct.getBalance() << "\n"; //1088.99
+	return 0;
 }							 
