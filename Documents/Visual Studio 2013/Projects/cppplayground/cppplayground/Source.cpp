@@ -4,80 +4,36 @@
 #include <vector>
 using namespace std;
 
-class Employee {
-protected:
-	string name;
-	double pay;
-public:
-	Employee(){
-		name = "";
-		pay = 0;
-	}
-	Employee(string empName, double payRate){
-		name = empName;
-		pay = payRate;
-	}
-	~Employee() {}
-	string getName(){
-		return name;
-	}
-	void setName(string empName){
-		name = empName;
-	}
-	double getPay(){
-		return pay;
-	}
-	void setPay(double payRate){
-		pay = payRate;
-	}
-	virtual double grossPay(double hours) {
-		return pay * hours;
-	}
-	string toString() {
-		stringstream stm;
-		stm << name << ": " << pay;
-		return stm.str();
-	}
+class Shape {
+	virtual void setX(int xcor) = 0;
+	virtual void setY(int ycor) = 0;
+	virtual int getX() const = 0;
+	virtual int getY() const = 0;
+	virtual void draw() const = 0;
 };
-class Manager : public Employee {
+
+class Circle : public Shape {
 private:
-	bool salaried;
+	int x, y, rad;
 public:
-	Manager() : salaried(true) {}
-	Manager(string name, double payRate, bool isSalaried) : Employee(name, payRate) {
-		salaried = isSalaried;
+	Circle(int xcor, int ycor, int r){
+		x = xcor;
+		y = ycor;
+		rad = r;
 	}
-	~Manager() {}
-	bool getSalaried(){
-		return salaried;
-	}
-	virtual double grossPay(double hours){
-		if (salaried){
-			return pay;
-		}
-		else {
-			return pay * hours;
-		}
-	}
-	string toString() {
-		stringstream stm;
-		string salary;
-		if (salaried){
-			salary = "Salaried";
-		}
-		else {
-			salary = "Hourly";
-		}
-		stm << name << ": " << pay << " " << salary;
-		return stm.str();
+	~Circle() {}
+	virtual void setX(int xcor) {}
+	virtual void setY(int ycor) {}
+	void setRadius(int r){ rad = r; }
+	virtual int getX() const { return x; }
+	virtual int getY() const { return y; }
+	int getRadius()	const { return rad; }
+	virtual void draw()	const {
+		cout << "drawing circle at: " << getX() << ", " << getY() << " with a radius of: " << getRadius() << "\n";
 	}
 };
+
 int main(){
-	vector<Employee*> emps;
-	Employee emp1("Jane", 10.01);
-	Manager man1("Bob", 1000.01, true);
-	emps.push_back(&emp1); emps.push_back(&man1);
-	for (int i = 0; i < emps.size(); ++i){
-		cout << emps[i]->grossPay(100) << "\n";
-	}
+	Circle c1(1, 2, 3);
+	c1.draw();
 }
