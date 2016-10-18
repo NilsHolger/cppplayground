@@ -16,6 +16,9 @@ public:
 		name = empName;
 		pay = payRate;
 	}
+	~Employee() {
+		//do something here
+	}
 	string getName(){
 		return name;
 	}
@@ -41,14 +44,35 @@ class Manager : public Employee {
 private:
 	bool salaried;
 public:
+	Manager() : salaried(true) {}
 	Manager(string name, double payRate, bool isSalaried) : Employee(name, payRate) {
 		salaried = isSalaried;
+	}
+	~Manager() {
+		//free allocated resources
 	}
 	bool getSalaried(){
 		return salaried;
 	}
-	double grossPay(){
-		return pay;
+	double grossPay(int hours = 0){
+		if (salaried){
+			return pay;
+		}
+		else {
+			return pay * hours;
+		}
+	}
+	string toString() {
+		stringstream stm;
+		string salary;
+		if (salaried){
+			salary = "Salaried";
+		}
+		else {
+			salary = "Hourly";
+		}
+		stm << name << ": " << pay << " " << salary;
+		return stm.str();
 	}
 };
 int main(){
