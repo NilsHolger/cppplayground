@@ -3,14 +3,22 @@
 #include <sstream>
 #include <vector>
 using namespace std;
-
-template <typename T, typename U>
-T max(T arg1, U arg2){
-	return (arg1 > arg2) ? arg1 : arg2;
-}
+template<class T, class U>
+class CMap {
+private:
+	vector<T> keys;
+	vector<U> values;
+public:
+	void insert(T key, U value){
+		keys.push_back(key);
+		values.push_back(value);
+	}
+	void get(int n){
+		cout << keys[n] << " : " << values[n] << "\n";
+	}
+};
 int main(){
-	double num1 = 11.01;
-	int num2 = 10;
-	cout << max(num2, num1) << "\n";
-	//loss of data if data type first arg < second arg, truncation
+	CMap<int, string> c;
+	c.insert(1, "value1"); c.insert(2, "value2"); c.insert(3, "value3");
+	c.get(1);
 }
