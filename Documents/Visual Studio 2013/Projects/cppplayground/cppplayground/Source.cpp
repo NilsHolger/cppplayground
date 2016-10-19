@@ -3,22 +3,14 @@
 #include <sstream>
 #include <vector>
 using namespace std;
-template<class T, class U>
-class CMap {
-private:
-	vector<T> keys;
-	vector<U> values;
-public:
-	void insert(T key, U value){
-		keys.push_back(key);
-		values.push_back(value);
-	}
-	void get(int n){
-		cout << keys[n] << " : " << values[n] << "\n";
-	}
-};
+template <typename T>
+bool equals(T value1, T value2){
+	return (value1 == value2) ? true : false;
+}
 int main(){
-	CMap<int, string> c;
-	c.insert(1, "value1"); c.insert(2, "value2"); c.insert(3, "value3");
-	c.get(1);
+	int a = 0, b = 1;
+	cout << equals(a, b) << "\n";
+	string s1, s2;
+	s1 = s2 = "you sexy string";
+	cout << equals(s1, s2) << "\n";
 }
