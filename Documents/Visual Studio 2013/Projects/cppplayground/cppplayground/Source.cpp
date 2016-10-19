@@ -2,22 +2,28 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <stdexcept>
 using namespace std;
+class DivideByZero : public runtime_error {
+public:
+	DivideByZero() : runtime_error("divide by zero exception") {}
+	~DivideByZero() {}
+};
+
+double quotient(double num, double den){
+	if (den == 0) { throw DivideByZero(); }
+	else { return num / den; }
+}
 
 int main(){
-	const int DivideByZero = 1;
-	try	{
-		int num = 10; int den = 0;
-		if (den == 0){
-			throw DivideByZero;
-		}
-		else {
-			cout << num / den << "\n";
-		}
+	try {
+		cout << quotient(10, 0) << "\n";
+		//throw "a new exception";
 	}
-	catch (int e){
-		if (e == DivideByZero){
-			cout << "can't divide by zero" << "\n";
-		}
+	catch (DivideByZero &except){
+		cout << except.what() << "\n";
+	}
+	catch (...){
+		cout << "catch all exceptions" << "\n";
 	}
 }	
