@@ -4,36 +4,63 @@
 #include <vector>
 using namespace std;
 
-template <typename T>
-void display(T arr[], int size){
-	for (int i = 0; i < size; i++){
-		cout << arr[i];
+template<typename T>
+class Stack {
+private:
+	T datastore[100];
+	int top;
+public:
+	Stack(){
+		top = -1;
 	}
-	cout << "\n";
-}
-template <typename T>
-T max(T &arg1, T &arg2){
-	if (arg1 > arg2){
-		return arg1;
+	~Stack(){}
+	void push(T num){
+		++top;
+		datastore[top] = num;
 	}
-	else {
-		return arg2;
+	T pop(){
+		T value = datastore[top];
+		datastore[top] = 0;
+		--top;
+		return value;
 	}
-}
+	T peek(){
+		return datastore[top];
+	}
+};
+template<>
+class Stack<string> {
+private:
+	string datastore[100];
+	int top;
+public:
+	Stack(){
+		top = -1;
+	}
+	~Stack(){}
+	void push(string val){
+		++top;
+		datastore[top] = val;
+	}
+	string pop(){
+		string value = datastore[top];
+		datastore[top] = "";
+		--top;
+		return value;
+	}
+	string peek(){
+		return datastore[top];
+	}
+};
+
 int main(){
-	//const int size = 10;
-	//int numbers[size];
-	//for (int i = 0; i < size; ++i){
-	//	numbers[i] = i + 1;
-	//}
-	//display(numbers, size);
-	//string names[] = { "Maria", "Barbara", "Michaela", "Sophie", "Jennifer", "Jane", "Angelika",
-	//	"Astrid", "Barbie", "Marie" };
-	//display(names, size);
-	//int a = 10; int b = 20;
-	//cout << max(a, b) << "\n";
-	//double x = 30.05; double y = 40.255;
-	//cout << max(x, y) << "\n";
-	string s1 = "angular"; string s2 = "apple";
-	cout << max(s1, s2) << "\n";
+	Stack<int> numbers;
+	numbers.push(10); numbers.push(20); numbers.push(30);
+	cout << numbers.peek() << "\n"; //LIFO 30
+	cout << numbers.pop() << "\n"; //30
+	cout << numbers.peek() << "\n"; //20
+	Stack<string> strings; strings.push("Marie"); strings.push("Maria"); strings.push("Eva");
+	cout << strings.peek() << "\n"; //Eva
+	cout << strings.pop() << "\n"; //Eva
+	cout << strings.peek() << "\n"; //Maria
 }
