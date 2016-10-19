@@ -4,36 +4,36 @@
 #include <vector>
 using namespace std;
 
-class Shape {
-	virtual void setX(int xcor) = 0;
-	virtual void setY(int ycor) = 0;
-	virtual int getX() const = 0;
-	virtual int getY() const = 0;
-	virtual void draw() const = 0;
-};
-
-class Circle : public Shape {
-private:
-	int x, y, rad;
-public:
-	Circle(int xcor, int ycor, int r){
-		x = xcor;
-		y = ycor;
-		rad = r;
+template <typename T>
+void display(T arr[], int size){
+	for (int i = 0; i < size; i++){
+		cout << arr[i];
 	}
-	~Circle() {}
-	virtual void setX(int xcor) {}
-	virtual void setY(int ycor) {}
-	void setRadius(int r){ rad = r; }
-	virtual int getX() const { return x; }
-	virtual int getY() const { return y; }
-	int getRadius()	const { return rad; }
-	virtual void draw()	const {
-		cout << "drawing circle at: " << getX() << ", " << getY() << " with a radius of: " << getRadius() << "\n";
+	cout << "\n";
+}
+template <typename T>
+T max(T &arg1, T &arg2){
+	if (arg1 > arg2){
+		return arg1;
 	}
-};
-
+	else {
+		return arg2;
+	}
+}
 int main(){
-	Circle c1(1, 2, 3);
-	c1.draw();
+	//const int size = 10;
+	//int numbers[size];
+	//for (int i = 0; i < size; ++i){
+	//	numbers[i] = i + 1;
+	//}
+	//display(numbers, size);
+	//string names[] = { "Maria", "Barbara", "Michaela", "Sophie", "Jennifer", "Jane", "Angelika",
+	//	"Astrid", "Barbie", "Marie" };
+	//display(names, size);
+	//int a = 10; int b = 20;
+	//cout << max(a, b) << "\n";
+	//double x = 30.05; double y = 40.255;
+	//cout << max(x, y) << "\n";
+	string s1 = "angular"; string s2 = "apple";
+	cout << max(s1, s2) << "\n";
 }
