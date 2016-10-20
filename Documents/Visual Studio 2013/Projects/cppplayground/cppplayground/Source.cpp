@@ -9,19 +9,16 @@
 #include <deque>
 #include <utility>
 #include <map>
+#include <assert.h>
 using namespace std;
-struct Base {
-	Base(const int i) : m_i(i){}
-	void do_something()	{ m_i += 4; }
-	int m_i = 0;
-};
-struct Derived : Base{
-	Derived() : Base(10) {}
-	void do_something_else() { ++m_i; }
+
+template<typename T>
+struct MyStruct {
+	T data;
 };
 int main(){
-	Derived d;
-	d.do_something();
-	d.do_something_else();
-	cout << d.m_i << '\n'; //15
+	MyStruct<int> s;
+	s.data = 1;
+	assert(typeid(s.data) == typeid(int));
+	cout << s.data << '\n';
 }	
