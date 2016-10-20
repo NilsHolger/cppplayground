@@ -6,20 +6,16 @@
 #include <sstream>
 #include <fstream>
 #include <list>
+#include <deque>
 using namespace std;
 
-void loopDisplay(list<string> ls){
-	list<string>::iterator doit = ls.begin();
-	while (doit != ls.end()){
-		cout << *doit << "\n";
-		++doit;
+void loopDisplay(deque<string> ds){
+	for (int i = 0; i < ds.size(); ++i){
+		cout << ds[i] << "\n";
 	}
 }
 int main(){
-	list<string> tdl; tdl.push_back("eat"); tdl.push_back("sleep"); tdl.push_back("code");
-	loopDisplay(tdl);
-	cout << tdl.front() << " " << tdl.back() << "\n"; tdl.reverse();
-	loopDisplay(tdl);
-	tdl.sort();
-	loopDisplay(tdl);
+	deque<string> tech;tech.push_back("C++");tech.push_front("JavaScript");tech.push_back("NodeJS");
+	loopDisplay(tech);tech.pop_back();tech.pop_front();loopDisplay(tech);
+	cout << tech.size() << "\n";
 }	
