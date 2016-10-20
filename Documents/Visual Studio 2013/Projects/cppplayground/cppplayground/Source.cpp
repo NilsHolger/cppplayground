@@ -7,18 +7,16 @@
 #include <fstream>
 #include <list>
 #include <deque>
+#include <utility>
+#include <map>
 using namespace std;
 
-int find(deque<string> d, string v){
-	for (int i = 0; i < d.size(); i++){
-		if (d.at(i) == v){
-			return i;
-		}
-	}
-	return -1;
-}
 int main(){
-	deque<string> tech;tech.push_back("C++");tech.push_front("JavaScript");tech.push_back("NodeJS");
-	int found = find(tech, "NodeJS");
-	(found > -1) ? cout << tech[found] << "\n" : cout << "not found" << "\n";
+	pair<int, string> n(1, "Node");
+	cout << n.first << " " << n.second << "\n";
+	map<int, string> o; o[1] = "JS"; o[2] = "C++"; o[3] = "V8"; o[4] = "C#";
+	cout << o[1] << " " << o.size() << "\n"; o.erase(4); cout << o.size() << "\n";
+	int p = 3; if (o.find(p) != o.end()){ cout << o[p] << "\n"; }
+	map<int, string>::iterator it = o.begin();
+	while (it != o.end()){ cout << it->second << "\n"; it++; }
 }	
