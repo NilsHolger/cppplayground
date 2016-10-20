@@ -3,27 +3,23 @@
 #include <sstream>
 #include <vector>
 #include <stdexcept>
+#include <fstream>
 using namespace std;
-class DivideByZero : public runtime_error {
-public:
-	DivideByZero() : runtime_error("divide by zero exception") {}
-	~DivideByZero() {}
-};
 
-double quotient(double num, double den){
-	if (den == 0) { throw DivideByZero(); }
-	else { return num / den; }
-}
 
 int main(){
+	ifstream file;
+	file.exceptions(ifstream::failbit | ifstream::badbit);
 	try {
-		cout << quotient(10, 0) << "\n";
-		//throw "a new exception";
+		file.open("file.txt");
+		while (!file.eof()){
+			cout << file.get();
+		}
 	}
-	catch (DivideByZero &except){
-		cout << except.what() << "\n";
+	catch (ifstream::failure e){
+		cout << e.what() << "\n";
+		cout << "error opening file." << "\n";
+		return 1;
 	}
-	catch (...){
-		cout << "catch all exceptions" << "\n";
-	}
+	file.close();
 }	
