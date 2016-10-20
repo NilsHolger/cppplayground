@@ -11,19 +11,17 @@
 #include <map>
 #include <assert.h>
 using namespace std;
+class Test {
+	int i = 100;
+public:
+	struct Nested {
+		static int get_private_i(const Test &t){
+			return t.i;
+		}
+	};
+};
 
-struct Base {
-friend int main();
-public: int i;
-protected: int j;
-private: int k;
-};
-struct Derived : protected Base {
-friend int main();
-public: int l;
-protected: int m;
-private: int n;
-};
 int main(){
-	Derived d;d.i = 1;d.j = 2;d.k = 3;d.l = 4;d.m = 5;d.n = 6;
+	Test t;
+	cout << Test::Nested::get_private_i(t) << '\n';
 }	
