@@ -31,5 +31,6 @@
     <Text Include="birthdayletter.txt">
       <Filter>Source Files</Filter>
     </Text>
+    <Text Include="grades.txt" />
   </ItemGroup>
 </Project>
