@@ -5,18 +5,21 @@
 #include <stdexcept>
 #include <sstream>
 #include <fstream>
+#include <list>
 using namespace std;
 
-
+void loopDisplay(list<string> ls){
+	list<string>::iterator doit = ls.begin();
+	while (doit != ls.end()){
+		cout << *doit << "\n";
+		++doit;
+	}
+}
 int main(){
-	vector<int> numbers(10);
-	int sum = 0;
-	for (int i = 1; i < 11; ++i){
-		numbers.push_back(i);
-	}
-	for (int i = 0; i < numbers.size(); ++i){
-		sum += numbers[i];
-	}
-	cout << sum << "\n"; //55
-
+	list<string> tdl; tdl.push_back("eat"); tdl.push_back("sleep"); tdl.push_back("code");
+	loopDisplay(tdl);
+	cout << tdl.front() << " " << tdl.back() << "\n"; tdl.reverse();
+	loopDisplay(tdl);
+	tdl.sort();
+	loopDisplay(tdl);
 }	
