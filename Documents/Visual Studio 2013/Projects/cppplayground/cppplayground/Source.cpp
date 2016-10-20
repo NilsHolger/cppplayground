@@ -12,13 +12,18 @@
 #include <assert.h>
 using namespace std;
 
-template<typename T>
-struct MyStruct {
-	T data;
+struct Base {
+friend int main();
+public: int i;
+protected: int j;
+private: int k;
+};
+struct Derived : protected Base {
+friend int main();
+public: int l;
+protected: int m;
+private: int n;
 };
 int main(){
-	MyStruct<int> s;
-	s.data = 1;
-	assert(typeid(s.data) == typeid(int));
-	cout << s.data << '\n';
+	Derived d;d.i = 1;d.j = 2;d.k = 3;d.l = 4;d.m = 5;d.n = 6;
 }	
