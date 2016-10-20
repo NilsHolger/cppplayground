@@ -9,16 +9,14 @@ using namespace std;
 
 
 int main(){
-	ifstream gradeFile; stringstream grades;
-	int grade;  int total = 0; string line;
-	gradeFile.open("grades.txt");
-	getline(gradeFile, line);
-	grades << line;
-	gradeFile.close();
-	for (int i = 0; i < 5; ++i){
-		grades >> grade;
-		total += grade;
+	vector<int> numbers(10);
+	int sum = 0;
+	for (int i = 1; i < 11; ++i){
+		numbers.push_back(i);
 	}
-	double average = total / 5;
-	cout << average << "\n"; //80
+	for (int i = 0; i < numbers.size(); ++i){
+		sum += numbers[i];
+	}
+	cout << sum << "\n"; //55
+
 }	
