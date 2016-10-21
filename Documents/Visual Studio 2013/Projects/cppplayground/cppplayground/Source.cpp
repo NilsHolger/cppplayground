@@ -1,27 +1,11 @@
-#include <string>
 #include <iostream>
-#include <sstream>
 #include <vector>
-#include <stdexcept>
-#include <sstream>
-#include <fstream>
-#include <list>
-#include <deque>
-#include <utility>
-#include <map>
-#include <assert.h>
-using namespace std;
-class Test {
-	int i = 100;
-public:
-	struct Nested {
-		static int get_private_i(const Test &t){
-			return t.i;
-		}
-	};
-};
 
+using namespace std;
+size_t count_1(const vector<int> &t_v){
+	return count(begin(t_v), end(t_v), 1);
+}
 int main(){
-	Test t;
-	cout << Test::Nested::get_private_i(t) << '\n';
+	vector<int> v{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1 };
+	cout << count_1(v) << '\n';	
 }	
