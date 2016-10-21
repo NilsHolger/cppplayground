@@ -1,11 +1,16 @@
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace std;
-size_t count_1(const vector<int> &t_v){
-	return count(begin(t_v), end(t_v), 1);
-}
 int main(){
-	vector<int> v{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1 };
-	cout << count_1(v) << '\n';	
+	const vector<int> v{ 0, 1, 0, 1, 1, 0, 0, 0, 1, 0, 1, 1 };
+	const vector<string> w{ "you", "sexy", "string" };
+	const vector<char> x{ 'h','e','l','l','o','w','o','r','l','d' };
+	//for (auto itr = v.begin(); itr != v.end(); ++itr){
+	//	cout << *itr << "\n";
+	//}
+	for (const auto &i : x){
+		cout << i << "\n";
+	}
 }	
