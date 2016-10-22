@@ -11,3 +11,8 @@
 #include <typeinfo>
 #include <functional>
 #include <memory>
+#include <csignal>
+#include <tuple>
+#include <cstdio>	 
+#include <boost>
+#include <sstream>

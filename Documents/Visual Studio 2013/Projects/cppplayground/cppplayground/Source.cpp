@@ -1,30 +1,24 @@
 #include "headers.h"
 using namespace std;
 
-string getName(){
-	return "Node";
-}
-void printName(const string& name){
-	cout << "stand ref: " << name << '\n';
-}
-void printName(string&& name){
-	cout << "rvalue ref: " << name << '\n';
-}
+class String {
+	string s;
+public:
+	String(const string &s) : s(s){}
+	String to_lower_copy()const {
+		return boost::to_lower_copy(s);
+	}
+	vector<String> split(const string& delimeter = "  ")const {
+		vector<string> parts;
+		boost::split(parts, s, boost::is_any_of(delimeter), boost::token_compress_on);
+		return vector<String>(parts.begin(), parts.end());
+	}
+	size_t get_length() const { return s.length(); };
+};
 
 int main(){
 	
-	string name1 = getName(); cout << name1 << '\n';
+	String s{ "You      Sexy      String" };
+	for (auto& t : s.to_lower_copy().split()){ cout << t.get_length() << '\n'; };
 
-	string& name2 = getName(); cout << name2 << '\n';
-	name2 = "V8"; cout << name2 << '\n';
-
-	string&& name3 = getName();
-	name3 = "lib_uv"; cout << name3 << '\n';
-
-	string name4{ "JavaScript" };
-	printName(getName());
-	printName(name4);
-	string name5{ "C++" };
-	printName(getName());
-	printName(name5);
 }
