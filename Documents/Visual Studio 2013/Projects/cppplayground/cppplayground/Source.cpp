@@ -1,26 +1,24 @@
-#include <iostream>
-#include <vector>
-#include <string>
-#include <algorithm>
-#include <random>
-#include <iterator>
-#include <cstring>
-#include <chrono>
-#include <map>
-#include <cmath>
-#include <typeinfo>
-#include <functional>
+#include "headers.h"
 using namespace std;
-
+enum class color {
+	red, green, blue, rainbow
+};
 int main(){
-	vector<int> scores{ 10, 5, 1, 7, 9, 11 };
-	for_each(begin(scores), end(scores), [](int n){cout << n << '\n'; });
-	auto one = 1;
-	auto is_positive_tier = [=](int n){ return n > one; };
-	cout << boolalpha <<  is_positive_tier(2) << '\n';
-	function<int(int)> fib = [&fib](int x){return x < 2 ? 1 : fib(x - 1) + fib(x - 2); };
-	cout << fib(10) << '\n';
-	for (int i = 1; i <= 10; ++i){
-		cout << fib(i) << '\n';
+	vector<int> v{ 1, 2, 3, 4, 5 };
+	auto res = 1;
+	for (int a : { 1, 2, 3, 4, 5, 6 }){
+		res *= a;
 	}
+	cout << res << '\n';
+	map<int, string> future; 
+	future.insert(pair<int,string>(1, "JavaScript"));
+	future.insert(pair<int, string>(2, "C++"));
+	future.insert(pair<int, string>(3, "NodeJS"));
+	future.insert(pair<int, string>(4, "V8"));
+	future.insert(pair<int, string>(5, "ms"));
+	future.erase(5);
+	for (const auto& kvp : future){
+		cout << kvp.first << " " << kvp.second << '\n';
+	}
+
 }
