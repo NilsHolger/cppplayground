@@ -5,13 +5,15 @@
 #include <random>
 #include <iterator>
 using namespace std;
+
+struct SCounter{
+	SCounter(string t_s) : s(move(t_s)), num_s(count(s.begin(), s.end(), 's')){}
+	const string s;
+	const int num_s;
+};
+
 int main(){
 	const string s1 = "she has a sexy string";
-	const auto num_rs = count(begin(s1), end(s1), 's');
-	auto total_length = 0;
-	for (const auto &postfix : { "1", "2", "3" }){
-		const auto appended = s1 + postfix;
-		total_length += appended.size();
-	}
-	cout << num_rs + total_length << '\n';
+	SCounter s(s1);
+	cout << s.num_s << '\n';
 }
