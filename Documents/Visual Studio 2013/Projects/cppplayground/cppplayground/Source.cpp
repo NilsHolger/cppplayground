@@ -1,18 +1,13 @@
 #include "headers.h"
 using namespace std;
 
-template<typename T, size_t Size>
-class Values {
-
-	static_assert(Size > 1, "use a scalar");
-	T values[Size];
-};
-template<typename T, typename U>
-auto multiply(T t, U u) -> int { 
-	static_assert(is_integral<T>::value, "first val must be an int");
-	return t * u;
+auto sum() -> double { return 0.0; }
+template<typename H, typename ... T>
+auto sum(H h, T... t) -> double //-> decltype(h+sum(t...))
+{
+	return h + sum(t ...);
 }
+
 int main(){
-	Values<string, 2> v; 
-	cout << multiply(10,10) << '\n';
+	cout << sum(99.1, 0.98) << '\n';
 }
