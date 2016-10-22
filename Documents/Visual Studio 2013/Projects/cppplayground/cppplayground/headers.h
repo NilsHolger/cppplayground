@@ -10,3 +10,4 @@
 #include <cmath>
 #include <typeinfo>
 #include <functional>
+#include <memory>
