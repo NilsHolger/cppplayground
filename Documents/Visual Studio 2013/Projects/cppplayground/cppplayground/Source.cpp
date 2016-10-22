@@ -6,17 +6,12 @@
 #include <iterator>
 using namespace std;
 int main(){
-	vector<int> n1; vector<int> n2;
-	random_device rd; mt19937 gen(rd());
-	uniform_int_distribution<> dis(1, 100);
-	generate_n(back_inserter(n1), 100, [&]() {return dis(gen);});
-	generate_n(back_inserter(n2), 100, [&]() {return dis(gen);});
-	vector<int> in_both;
-	sort(n1.begin(), n1.end());
-	sort(n2.begin(), n2.end());
-	set_intersection(begin(n1), end(n1), begin(n2), end(n2), back_inserter(in_both));
-	for (const auto i : in_both){
-		cout << i << ',';
+	const string s1 = "she has a sexy string";
+	const auto num_rs = count(begin(s1), end(s1), 's');
+	auto total_length = 0;
+	for (const auto &postfix : { "1", "2", "3" }){
+		const auto appended = s1 + postfix;
+		total_length += appended.size();
 	}
-	cout << '\n';
+	cout << num_rs + total_length << '\n';
 }
