@@ -7,13 +7,10 @@
 using namespace std;
 
 int main(int argc, const char*[]){
-	const string s1 = [&](){
-		switch (argc)
-		{
-		case 0: return "0 args";
-		case 1: return "1 args";
-		default: return "many args";
-		}
+	const auto vc = [](){
+		vector<int> v(100, 0);
+		v[10] = 1;
+		return v;
 	}();
-	cout << s1 << '\n';
+	cout << vc[10] << '\n';
 }
