@@ -83,11 +83,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="geometry.cpp" />
+    <ClCompile Include="managememory.cpp" />
+    <ClCompile Include="person.cpp" />
+    <ClCompile Include="resource.cpp" />
     <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometry.h" />
     <ClInclude Include="headers.h" />
+    <ClInclude Include="person.h" />
+    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="birthdayletter.txt" />
