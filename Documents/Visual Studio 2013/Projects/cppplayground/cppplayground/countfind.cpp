@@ -10,16 +10,13 @@ void stack_and_heap()
 	delete[] values;
 }
 
-auto add(int a, int b)-> int{ return a + b; }
-auto enhance(string& s)-> void{ s += " value"; }
-inline auto add(string* s)-> void{ *s += " count"; }
-
 auto main() -> int 
 {
-	string s = "results";
-	cout << s << '\n';
-	add(&s);
-	cout << s << '\n';
+	string s("sexy string"); //allocated on stack cleaned up when exit scope
+	string* t = new string("tuv"); //alloc on heap new needs delete
+	delete t;
+	int* values = new int[256];
+	delete[] values;
 
 	getchar();
 }
