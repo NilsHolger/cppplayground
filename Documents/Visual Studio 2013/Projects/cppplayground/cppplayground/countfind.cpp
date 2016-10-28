@@ -1,22 +1,25 @@
 #include "headers.h"
 using namespace std;
 
-namespace life
+void stack_and_heap()
 {
-	auto meaning = "progress";
-	auto *pm = &meaning;
-	auto& rm = meaning;
+	string s("good evening");
+	string* t = new string("joe");
+	delete t;
+	int* values = new int[128];
+	delete[] values;
 }
 
-using namespace life;
-//using life::meaning;
+auto add(int a, int b)-> int{ return a + b; }
+auto enhance(string& s)-> void{ s += " value"; }
+inline auto add(string* s)-> void{ *s += " count"; }
+
 auto main() -> int 
 {
-	cout << meaning << " takes up " << sizeof(meaning) << " bytes" << '\n';
-	
-	*pm = "more progress";
-	rm = "and more progress";
-	cout << *pm << '\n';
+	string s = "results";
+	cout << s << '\n';
+	add(&s);
+	cout << s << '\n';
 
 	getchar();
 }
