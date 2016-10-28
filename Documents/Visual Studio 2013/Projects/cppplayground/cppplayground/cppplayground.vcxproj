@@ -82,6 +82,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="countfind.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="managememory.cpp" />
     <ClCompile Include="person.cpp" />

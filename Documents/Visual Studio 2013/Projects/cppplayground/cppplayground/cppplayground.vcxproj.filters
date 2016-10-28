@@ -30,6 +30,9 @@
     <ClCompile Include="managememory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="countfind.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometry.h">
