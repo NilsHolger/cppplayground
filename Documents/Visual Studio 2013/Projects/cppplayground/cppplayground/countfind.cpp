@@ -2,15 +2,25 @@
 using namespace std;
 
 
+enum Color { Red, Green, Blue, Rainbow};
+enum class GameState : short { Win = 1, Loose, Live, Die};
+
+union Data
+{
+	int integer;
+	float fNumber;
+	char* text;
+};
+
+struct Size
+{
+	int width, height;
+};
+
 auto main() -> int 
 {
-	int x = 2;
-	auto doubleValue = [](int y) { return y * 2; }; // y!
-	cout << doubleValue(x) << '\n';
-	int y = 3;
-	auto increaseByY = [&y](int z) { return z + y; };
-	y = 11;
-	cout << increaseByY(5) << '\n';
+	Size s{ 11, 10 };
+	cout << s.height << '\n';
 	getchar();
 }
 
