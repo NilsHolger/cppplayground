@@ -88,8 +88,11 @@
     <ClCompile Include="managememory.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="resource.cpp" />
+    <ClCompile Include="sharedptr.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="technology.cpp" />
+    <ClCompile Include="test.cpp" />
+    <ClCompile Include="uniqueptr.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="address.h" />

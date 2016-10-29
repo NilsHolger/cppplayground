@@ -1,9 +1,8 @@
 #include "headers.h"
 using namespace std;
 
-
-//auto main() -> int 
+//auto main() -> int
 //{
-//
 //	getchar();
 //}
+

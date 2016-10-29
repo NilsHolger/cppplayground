@@ -11,6 +11,8 @@
 #include <typeinfo>
 #include <functional>
 #include <memory>
+#include <thread>
+#include <mutex>
 #include <csignal>
 #include <tuple>
 #include <cstdio>	 
