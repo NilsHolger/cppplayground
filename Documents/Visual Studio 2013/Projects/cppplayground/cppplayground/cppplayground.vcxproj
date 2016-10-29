@@ -82,18 +82,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="component.cpp" />
     <ClCompile Include="countfind.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="managememory.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="technology.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="address.h" />
+    <ClInclude Include="compfactory.h" />
+    <ClInclude Include="component.h" />
     <ClInclude Include="geometry.h" />
     <ClInclude Include="headers.h" />
     <ClInclude Include="person.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="technology.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="birthdayletter.txt" />
