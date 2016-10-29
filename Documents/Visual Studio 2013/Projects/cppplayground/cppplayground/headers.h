@@ -16,5 +16,8 @@
 #include <csignal>
 #include <tuple>
 #include <cstdio>	 
-#include <C:\Users\Nils\Downloads\boost_1_51_0\boost\algorithm\string.hpp>
 #include <sstream>
+#include <C:\Users\Nils\Downloads\boost_1_51_0\boost\algorithm\string.hpp>
+#include <C:\Users\Nils\Downloads\SFML-2.4.0-windows-vc11-32-bit\SFML-2.4.0\include\SFML\Graphics.hpp>
+#include <C:\Users\Nils\Downloads\SFML-2.4.0-windows-vc11-32-bit\SFML-2.4.0\include\SFML\Window.hpp>
+

@@ -22,15 +22,15 @@ void thr(shared_ptr<Base> p)
 			<< ", lp.use_count() =" << lp.use_count() << '\n';
 	}
 }
-auto main() -> int
-{
-	shared_ptr<Base> p = make_shared<Derived>();
-	cout << p.get() << '\n' << p.use_count() << '\n';
-	thread t1(thr, p), t2(thr, p), t3(thr, p);
-	p.reset();
-	cout << p.get() << '\n' << p.use_count() << '\n';
-	t1.join(); t2.join(); t3.join();
-	cout << "all threads completed";
-	getchar();
-}
+//auto main() -> int
+//{
+//	shared_ptr<Base> p = make_shared<Derived>();
+//	cout << p.get() << '\n' << p.use_count() << '\n';
+//	thread t1(thr, p), t2(thr, p), t3(thr, p);
+//	p.reset();
+//	cout << p.get() << '\n' << p.use_count() << '\n';
+//	t1.join(); t2.join(); t3.join();
+//	cout << "all threads completed";
+//	getchar();
+//}
 
