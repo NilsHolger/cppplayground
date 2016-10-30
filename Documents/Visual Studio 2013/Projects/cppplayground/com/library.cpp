@@ -5,7 +5,8 @@
 
 struct Lion : ILion
 {
-	Lion(){ TRACE(L"Roar!\n"); }
+	unsigned m_count;
+	Lion() : m_count(0){ TRACE(L"Roar!\n"); }
 
 	~Lion()	{ TRACE(L"Lions never die, they multiply.\n"); }
 
@@ -18,9 +19,25 @@ struct Lion : ILion
 	{
 		TRACE(L"Attack\n");
 	}
+
+	void __stdcall AddRef()
+	{
+		++m_count;
+	}
+
+	void __stdcall Release()
+	{
+		if (0 == --m_count)
+		{
+			delete this;
+		}
+	}
+
 };
 
 ILion * __stdcall CreateLion()
 {
-	return new Lion;
+	ILion * result = new Lion;
+	result->AddRef();
+	return result;
 }
