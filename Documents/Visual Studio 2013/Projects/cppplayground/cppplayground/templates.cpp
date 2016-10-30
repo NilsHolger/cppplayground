@@ -70,10 +70,25 @@ void consume_template_specialization()
 
 }
 
+template <typename T>
+T sum(T t) { return t; }
+template<typename T, typename ...U>
+auto sum(T t, U ...u) -> decltype(t + sum(u...))
+{
+	return t + sum(u...);
+}
+
+void variadic()
+{
+	cout << sum(1, 2, 3.141592, 4, 5.5) << '\n';
+	cout << sum(string("y,"), string("y!")) << '\n';
+}
+
 auto main() -> int
 {
 	//consume_template();
 	//consume_template_function();
 	//consume_template_specialization();
+	variadic();
 	getchar();
 }
