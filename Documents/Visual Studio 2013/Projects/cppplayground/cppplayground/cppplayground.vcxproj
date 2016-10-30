@@ -87,6 +87,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="a1.cpp" />
+    <ClCompile Include="algorithms.cpp" />
     <ClCompile Include="component.cpp" />
     <ClCompile Include="containers.cpp" />
     <ClCompile Include="countfind.cpp" />
