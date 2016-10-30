@@ -94,6 +94,7 @@
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="managememory.cpp" />
     <ClCompile Include="numerics.cpp" />
+    <ClCompile Include="optional.cpp" />
     <ClCompile Include="person.cpp" />
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="sharedptr.cpp" />
