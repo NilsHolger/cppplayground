@@ -84,11 +84,29 @@ void variadic()
 	cout << sum(string("y,"), string("y!")) << '\n';
 }
 
+template <int n> struct Factorial
+{
+	enum { value = n * Factorial<n-1>::value};
+};
+template<> struct Factorial<0>
+{
+	enum {value = 1};
+};
+
+void metaprogramming()
+{
+	int x = Factorial<4>::value;
+	int y = Factorial<0>::value;
+	int z = Factorial<6>::value;
+	cout << z << '\n';
+}
+
 auto main() -> int
 {
 	//consume_template();
 	//consume_template_function();
 	//consume_template_specialization();
-	variadic();
+	//variadic();
+	metaprogramming();
 	getchar();
 }
