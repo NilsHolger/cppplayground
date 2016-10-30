@@ -97,6 +97,7 @@
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="sharedptr.cpp" />
     <ClCompile Include="Source.cpp" />
+    <ClCompile Include="streams.cpp" />
     <ClCompile Include="technology.cpp" />
     <ClCompile Include="templates.cpp" />
     <ClCompile Include="test.cpp" />
