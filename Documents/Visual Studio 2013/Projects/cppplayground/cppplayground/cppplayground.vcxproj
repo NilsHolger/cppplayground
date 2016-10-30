@@ -100,6 +100,8 @@
     <ClCompile Include="person.cpp" />
     <ClCompile Include="any.cpp" />
     <ClCompile Include="resource.cpp" />
+    <ClCompile Include="sample\application.cpp" />
+    <ClCompile Include="sample\library.cpp" />
     <ClCompile Include="sharedptr.cpp" />
     <ClCompile Include="signals2.cpp" />
     <ClCompile Include="Source.cpp" />
@@ -117,11 +119,16 @@
     <ClInclude Include="headers.h" />
     <ClInclude Include="person.h" />
     <ClInclude Include="resource.h" />
+    <ClInclude Include="sample\library.h" />
     <ClInclude Include="technology.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="birthdayletter.txt" />
     <Text Include="grades.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="sample\library.def" />
+    <None Include="sample\managed.cs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

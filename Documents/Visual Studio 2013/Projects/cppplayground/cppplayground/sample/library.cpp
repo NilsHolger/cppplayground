@@ -1,5 +1,6 @@
 #include "library.h"
 #include <stdio.h>
+#include <windows.h>
 
 void __stdcall LionRoar()
 {
