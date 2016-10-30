@@ -121,49 +121,49 @@ void testCollision(Brick& mBrick, Ball& mBall)
 
 
 
-auto main() -> int
-{
-	cout << "right && left arrow keys\nmove the paddle\nescape to exit" << '\n';
-	Ball ball{ windowWidth / 2, windowHeight / 2 };
-	Paddle paddle{ windowWidth / 2, windowHeight - 50 };
-
-	vector<Brick> bricks;
-	for (int iX{ 0 }; iX < countBlocksX; ++iX){
-		for (int iY{ 0 }; iY < countBlocksY; ++iY){
-			bricks.emplace_back((iX + 1) * (blockWidth + 3) + 22,
-				(iY + 2) * (blockHeight + 3));
-		}
-	}
-
-
-	RenderWindow window{ { windowWidth, windowHeight }, "game time" };
-	window.setFramerateLimit(60);
-
-	while (true)
-	{
-		/*Event event;
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}*/
-		window.clear(Color::Black);
-		if (Keyboard::isKeyPressed(Keyboard::Key::Escape)){ break; }
-		ball.update();
-		paddle.update();
-
-		testCollision(paddle, ball);
-
-		for (auto& brick : bricks){ testCollision(brick, ball); }
-
-		bricks.erase(remove_if(begin(bricks), end(bricks),
-			[](const Brick& mBrick){ return mBrick.destroyed; }), end(bricks));
-
-
-		window.draw(ball.shape);
-		window.draw(paddle.shape);
-		for (auto& brick : bricks){ window.draw(brick.shape); }
-		window.display();
-	}
-}
+//auto main() -> int
+//{
+//	cout << "right && left arrow keys\nmove the paddle\nescape to exit" << '\n';
+//	Ball ball{ windowWidth / 2, windowHeight / 2 };
+//	Paddle paddle{ windowWidth / 2, windowHeight - 50 };
+//
+//	vector<Brick> bricks;
+//	for (int iX{ 0 }; iX < countBlocksX; ++iX){
+//		for (int iY{ 0 }; iY < countBlocksY; ++iY){
+//			bricks.emplace_back((iX + 1) * (blockWidth + 3) + 22,
+//				(iY + 2) * (blockHeight + 3));
+//		}
+//	}
+//
+//
+//	RenderWindow window{ { windowWidth, windowHeight }, "game time" };
+//	window.setFramerateLimit(60);
+//
+//	while (true)
+//	{
+//		/*Event event;
+//		while (window.pollEvent(event))
+//		{
+//			if (event.type == sf::Event::Closed)
+//				window.close();
+//		}*/
+//		window.clear(Color::Black);
+//		if (Keyboard::isKeyPressed(Keyboard::Key::Escape)){ break; }
+//		ball.update();
+//		paddle.update();
+//
+//		testCollision(paddle, ball);
+//
+//		for (auto& brick : bricks){ testCollision(brick, ball); }
+//
+//		bricks.erase(remove_if(begin(bricks), end(bricks),
+//			[](const Brick& mBrick){ return mBrick.destroyed; }), end(bricks));
+//
+//
+//		window.draw(ball.shape);
+//		window.draw(paddle.shape);
+//		for (auto& brick : bricks){ window.draw(brick.shape); }
+//		window.display();
+//	}
+//}
 
