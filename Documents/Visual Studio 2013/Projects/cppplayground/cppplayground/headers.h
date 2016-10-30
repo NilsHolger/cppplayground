@@ -22,6 +22,7 @@
 #include <array>
 #include <set>
 #include <boost\any.hpp>
+#include <boost\signals2.hpp>
 //#include <boost/program_options.hpp>
 #include <C:\Users\Nils\Downloads\boost_1_51_0\boost\optional\optional.hpp>
 #include <C:\Users\Nils\Downloads\boost_1_51_0\boost\algorithm\string.hpp>

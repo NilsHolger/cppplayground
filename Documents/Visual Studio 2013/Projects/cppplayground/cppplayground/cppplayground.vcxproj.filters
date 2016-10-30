@@ -72,6 +72,9 @@
     <ClCompile Include="any.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="signals2.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="geometry.h">

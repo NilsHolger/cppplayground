@@ -101,6 +101,7 @@
     <ClCompile Include="any.cpp" />
     <ClCompile Include="resource.cpp" />
     <ClCompile Include="sharedptr.cpp" />
+    <ClCompile Include="signals2.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="streams.cpp" />
     <ClCompile Include="technology.cpp" />
