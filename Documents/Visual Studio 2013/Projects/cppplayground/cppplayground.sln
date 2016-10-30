@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cppplayground", "cppplayground\cppplayground.vcxproj", "{4672393E-99B4-426A-AE64-55F2583457BB}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "com", "com\com.vcxproj", "{17C93A20-4DEF-4B47-948A-C6CB346B2CC1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -15,6 +17,10 @@ Global
 		{4672393E-99B4-426A-AE64-55F2583457BB}.Debug|Win32.Build.0 = Debug|Win32
 		{4672393E-99B4-426A-AE64-55F2583457BB}.Release|Win32.ActiveCfg = Release|Win32
 		{4672393E-99B4-426A-AE64-55F2583457BB}.Release|Win32.Build.0 = Release|Win32
+		{17C93A20-4DEF-4B47-948A-C6CB346B2CC1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{17C93A20-4DEF-4B47-948A-C6CB346B2CC1}.Debug|Win32.Build.0 = Debug|Win32
+		{17C93A20-4DEF-4B47-948A-C6CB346B2CC1}.Release|Win32.ActiveCfg = Release|Win32
+		{17C93A20-4DEF-4B47-948A-C6CB346B2CC1}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
