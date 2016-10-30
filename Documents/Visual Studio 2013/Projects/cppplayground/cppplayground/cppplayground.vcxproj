@@ -88,6 +88,7 @@
   <ItemGroup>
     <ClCompile Include="a1.cpp" />
     <ClCompile Include="component.cpp" />
+    <ClCompile Include="containers.cpp" />
     <ClCompile Include="countfind.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="managememory.cpp" />

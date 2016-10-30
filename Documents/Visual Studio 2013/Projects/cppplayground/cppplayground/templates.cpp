@@ -101,12 +101,12 @@ void metaprogramming()
 	cout << z << '\n';
 }
 
-auto main() -> int
-{
-	//consume_template();
-	//consume_template_function();
-	//consume_template_specialization();
-	//variadic();
-	metaprogramming();
-	getchar();
-}
+//auto main() -> int
+//{
+//	//consume_template();
+//	//consume_template_function();
+//	//consume_template_specialization();
+//	//variadic();
+//	metaprogramming();
+//	getchar();
+//}
