@@ -40,5 +40,8 @@
     <None Include="library.def">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="managed.cs">
+      <Filter>Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
