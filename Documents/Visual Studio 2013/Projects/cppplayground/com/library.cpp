@@ -1,47 +1,57 @@
 #include "library.h"
 #include "windows.h"
+#include <crtdbg.h>
+#include <new>
+using namespace std;
 
+#define ASSERT _ASSERTE
 #define TRACE OutputDebugString
 
 struct Lion : ILion2, IOfflineLion
 {
-	unsigned m_count;
+	long m_count;
 	Lion() : m_count(0){ TRACE(L"Roar!\n"); }
 
 	~Lion()	{ TRACE(L"Lions never die, they multiply.\n"); }
 
 	//
-	//IObject
+	//IUknown
 	//
-	void __stdcall AddRef()
+	ULONG __stdcall AddRef()
 	{
-		++m_count;
+		return _InterlockedIncrement(&m_count);
 	}
 
-	void __stdcall Release()
+	ULONG __stdcall Release()
 	{
-		if (0 == --m_count)
+		ULONG const result = InterlockedDecrement(&m_count);
+		if (0 == result)
 		{
 			delete this;
 		}
+		return result;
 	}
 
-	void * __stdcall As(const char *type)
+	HRESULT __stdcall QueryInterface(IID const & id, void ** result)
 	{
-		if (0 == strcmp(type, "ILion2") || 0 == strcmp(type, "ILion") || 0 == strcmp(type, "IObject"))
+		ASSERT(result);
+		if (id == _uuidof(ILion2) ||
+			id == _uuidof(ILion) ||
+			id == _uuidof(IUnknown))
 		{
-			AddRef();
-			return static_cast<ILion2 *>(this);
+			*result = static_cast<ILion2 *>(this);
 		}
-		else if (0 == strcmp(type, "IOfflineLion"))
+		else if (id == _uuidof(IOfflineLion))
 		{
-			AddRef();
-			return static_cast<IOfflineLion*>(this);
+			*result = static_cast<IOfflineLion *>(this);
 		}
 		else
 		{
-			return 0;
+			*result = 0;
+			return E_NOINTERFACE;
 		}
+		static_cast<IUnknown *>(*result)->AddRef();
+		return S_OK;
 	}
 
 	//
@@ -79,9 +89,15 @@ struct Lion : ILion2, IOfflineLion
 
 };
 
-ILion * __stdcall CreateLion()
+HRESULT __stdcall CreateLion(ILion ** result)
 {
-	ILion * result = new Lion;
-	result->AddRef();
-	return result;
+	ASSERT(result);
+	*result = new (std::nothrow) Lion;
+
+	if (0 == *result)
+	{
+		return E_OUTOFMEMORY;
+	}
+	(*result)->AddRef();
+	return S_OK;
 }
