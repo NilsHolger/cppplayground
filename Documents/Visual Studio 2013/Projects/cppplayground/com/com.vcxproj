@@ -76,6 +76,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app1.cpp" />
     <ClCompile Include="application.cpp" />
     <ClCompile Include="library.cpp" />
   </ItemGroup>
