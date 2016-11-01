@@ -10,6 +10,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "complus", "complus", "{98C8A065-E8D1-49C5-BC10-765970270D59}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "client", "client\client.vcxproj", "{F756069A-FA82-4CC8-AA07-9BA7DCE2AE66}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91} = {CF4F5A3D-0646-422C-A5B4-7B88674CED91}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "server", "server\server.vcxproj", "{CF4F5A3D-0646-422C-A5B4-7B88674CED91}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,11 +34,16 @@ Global
 		{F756069A-FA82-4CC8-AA07-9BA7DCE2AE66}.Debug|Win32.Build.0 = Debug|Win32
 		{F756069A-FA82-4CC8-AA07-9BA7DCE2AE66}.Release|Win32.ActiveCfg = Release|Win32
 		{F756069A-FA82-4CC8-AA07-9BA7DCE2AE66}.Release|Win32.Build.0 = Release|Win32
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91}.Debug|Win32.ActiveCfg = Debug|Win32
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91}.Debug|Win32.Build.0 = Debug|Win32
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91}.Release|Win32.ActiveCfg = Release|Win32
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F756069A-FA82-4CC8-AA07-9BA7DCE2AE66} = {98C8A065-E8D1-49C5-BC10-765970270D59}
+		{CF4F5A3D-0646-422C-A5B4-7B88674CED91} = {98C8A065-E8D1-49C5-BC10-765970270D59}
 	EndGlobalSection
 EndGlobal

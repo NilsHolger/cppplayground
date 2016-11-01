@@ -1,41 +1,19 @@
 #include "precompiled.h"
+#include "..\server\server.h"
 
 using namespace std;
 using namespace Microsoft::WRL;
-
-struct ComException
-{
-	HRESULT result;
-	explicit ComException(HRESULT const value) :
-		result(value)
-	{
-		
-	}
-};
-inline void HR(HRESULT const result)
-{
-	_ASSERTE(S_OK == result);
-	if (S_OK != result)
-	{
-		throw ComException(result);
-	}
-}
-struct ComRuntime
-{
-	ComRuntime()
-	{
-		HR(CoInitializeEx(nullptr, COINIT_MULTITHREADED));
-	}
-	~ComRuntime()
-	{
-		CoUninitialize();
-	}
-};
-
 
 
 auto main() -> int
 {
 	ComRuntime runtime;
 
+	ComPtr<ICave> cave;
+
+	HR(CoGetClassObject(__uuidof(Lion), CLSCTX_INPROC_SERVER,
+		nullptr, __uuidof(cave), reinterpret_cast<void **>(cave.GetAddressOf())));
+	ComPtr<ILion> lion;
+	HR(cave->CreateLion(lion.GetAddressOf()));
+	lion->Roar();
 }
