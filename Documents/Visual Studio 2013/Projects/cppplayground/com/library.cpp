@@ -1,16 +1,22 @@
 #include "library.h"
-#include "precompiled.h"
-#include <wrl.h>
+#include <atlbase.h>
+#include <atlcom.h>
+
 
 using namespace std;
-using namespace Microsoft::WRL;
 
 #define ASSERT _ASSERTE
 #define TRACE OutputDebugString
 
 //struct Lion : ILion2, IOfflineLion
-struct Lion : RuntimeClass<RuntimeClassFlags<ClassicCom>, ILion, ILion2, IOfflineLion>
+struct Lion : CComObjectRootEx<CComMultiThreadModel>, ILion2, IOfflineLion
 {
+	BEGIN_COM_MAP(Lion)
+		COM_INTERFACE_ENTRY(ILion)
+		COM_INTERFACE_ENTRY(ILion2)
+		COM_INTERFACE_ENTRY(IOfflineLion)
+	END_COM_MAP()
+
 	Lion() { TRACE(L"Roar!\n"); }
 
 	~Lion()	{ TRACE(L"Lions never die, they multiply.\n"); }
@@ -50,18 +56,33 @@ struct Lion : RuntimeClass<RuntimeClassFlags<ClassicCom>, ILion, ILion2, IOfflin
 
 };
 
+struct Module : CAtlDllModuleT<Module>
+{
+
+};
+
+static Module _AtlModule;
+
+BOOL __stdcall DllMain(HINSTANCE, DWORD reason, void * reserved)
+{
+	return _AtlModule.DllMain(reason, reserved);
+}
+
+
 HRESULT __stdcall CreateLion(ILion ** result)
 {
 	ASSERT(result);
 	//*result = new (std::nothrow) Lion;
 	*result = nullptr;
-	ComPtr<ILion2> lion = Make<Lion>();
+	auto object = new (nothrow)CComObject<Lion>;
 
-	if (!lion)
+
+	if (!object)
 	{
 		return E_OUTOFMEMORY;
 	}
-	//(*result)->AddRef();
-	*result = lion.Detach();
-	return S_OK;
+	object->AddRef();
+	HRESULT hr = object->QueryInterface(result);
+	object->Release();
+	return hr;
 }
