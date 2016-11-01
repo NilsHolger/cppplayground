@@ -8,3 +8,5 @@ the pragmatic programmer
 robert c martin
 douglas crockford
 scott delaware
+
+in the book coders at work, one of the guys who was well known to be able to fix all bugs, said his secret was to rebuild all the applications.
