@@ -82,11 +82,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="debug.h" />
+    <ClInclude Include="handle.h" />
     <ClInclude Include="precompiled.h" />
     <ClInclude Include="server.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="precompiled.cpp" />
+    <ClCompile Include="registration.cpp" />
     <ClCompile Include="server.cpp" />
   </ItemGroup>
   <ItemGroup>

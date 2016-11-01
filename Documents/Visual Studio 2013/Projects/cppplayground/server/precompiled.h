@@ -3,6 +3,8 @@
 #include <windows.h>
 #include <memory>
 #include <new>
+#include <ktmw32.h>
+#pragma comment(lib,"ktmw32.lib")
 
 
 #include <atlbase.h>

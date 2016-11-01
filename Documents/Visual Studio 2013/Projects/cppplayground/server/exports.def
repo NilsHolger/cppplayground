@@ -1,2 +1,5 @@
 EXPORTS
-DllGetClassObject PRIVATE
+DllGetClassObject   PRIVATE
+DllRegisterServer   PRIVATE
+DllUnregisterServer PRIVATE
+
