@@ -19,6 +19,7 @@ struct Lion : ILion2, IOfflineLion
 	//
 	ULONG __stdcall AddRef()
 	{
+		TRACE(L"AddRef\n");
 		return _InterlockedIncrement(&m_count);
 	}
 

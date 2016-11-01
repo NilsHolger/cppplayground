@@ -44,16 +44,16 @@ struct Lion
 	}
 };
 
-auto main() -> int
-{
-	//unique_ptr<Lion> lion = make_unique<Lion>();
-	//unique_ptr<Lion> lion(new Lion);
-	shared_ptr<Lion> lion = make_shared<Lion>();
-	//shared_ptr<Lion> lion(new Lion);
-	lion->Roar();
-	
-	//unique_ptr<Lion> other = move(lion);
-	shared_ptr<Lion> other = lion;
-
-	lion->Hunt();
-}
+//auto main() -> int
+//{
+//	//unique_ptr<Lion> lion = make_unique<Lion>();
+//	//unique_ptr<Lion> lion(new Lion);
+//	shared_ptr<Lion> lion = make_shared<Lion>();
+//	//shared_ptr<Lion> lion(new Lion);
+//	lion->Roar();
+//	
+//	//unique_ptr<Lion> other = move(lion);
+//	shared_ptr<Lion> other = lion;
+//
+//	lion->Hunt();
+//}
