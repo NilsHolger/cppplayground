@@ -4,6 +4,8 @@
 #include <string>
 #include <windows.h>
 #include <memory>
+#include <crtdbg.h>
+#include <new>
 
 #define TRACE ATLTRACE
 #define ASSERT ATLASSERT
