@@ -1,60 +1,59 @@
-#include "library.h"
+//#include "library.h"
 #include "precompiled.h"
+#define TRACE OutputDebugString
 
-template<typename T>
-class RemoveAddRefRelease : public T
-{
-	ULONG __stdcall AddRef();
-	ULONG __stdcall Release();
-};
+using namespace std;
 
-template <typename T>
-class ComPtr
+struct Lion
 {
-	T * m_ptr;
-public:
-	ComPtr() : m_ptr(0){}
-	~ComPtr()
+	Lion() { TRACE(L"Roar!\n"); }
+
+	~Lion()	{ TRACE(L"Lions never die, they multiply.\n"); }
+
+	//
+	//ILion
+	//
+
+	void Roar()
 	{
-		if (m_ptr)
-		{
-			m_ptr->Release();
-		}
+		TRACE(L"Roar\n");
 	}
-	RemoveAddRefRelease<T> * operator->() const
+
+	void Attack()
 	{
-		ASSERT(m_ptr);
-		return static_cast<RemoveAddRefRelease<T> *>(m_ptr);
+		TRACE(L"Attack\n");
 	}
-	T ** GetAddressOf()
+
+	//
+	//ILion2
+	//
+	void Hunt()
 	{
-		ASSERT(!m_ptr);
-		return &m_ptr;
+		TRACE(L"Hunt!\n");
+	}
+	//
+	//IOfflineLion
+	//
+	void Load(char const * /*file*/)
+	{
+
+	}
+	void Save(char const * /*file*/)
+	{
+
 	}
 };
 
 auto main() -> int
 {
-	ComPtr<ILion> lion;
-
-	if (S_OK != CreateLion(lion.GetAddressOf()))
-	{
-		return 0;
-	}
+	//unique_ptr<Lion> lion = make_unique<Lion>();
+	//unique_ptr<Lion> lion(new Lion);
+	shared_ptr<Lion> lion = make_shared<Lion>();
+	//shared_ptr<Lion> lion(new Lion);
 	lion->Roar();
-	//lion->Attack();
 	
-	ComPtr<ILion2> lion2;
+	//unique_ptr<Lion> other = move(lion);
+	shared_ptr<Lion> other = lion;
 
-	if (S_OK == lion->QueryInterface(lion2.GetAddressOf()))
-	{
-		lion2->Hunt();
-	}
-
-	ComPtr<IOfflineLion> offline;
-
-	if (S_OK == lion->QueryInterface(offline.GetAddressOf()))
-	{
-		offline->Save("filename");
-	}
+	lion->Hunt();
 }

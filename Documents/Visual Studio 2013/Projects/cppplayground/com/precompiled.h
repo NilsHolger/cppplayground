@@ -2,6 +2,8 @@
 
 #include <atlbase.h>
 #include <string>
+#include <windows.h>
+#include <memory>
 
 #define TRACE ATLTRACE
 #define ASSERT ATLASSERT
