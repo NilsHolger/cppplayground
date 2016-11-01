@@ -122,5 +122,6 @@
       <Filter>Source Files</Filter>
     </None>
     <None Include="sample\managed.cs" />
+    <None Include="sample\library.dll" />
   </ItemGroup>
 </Project>

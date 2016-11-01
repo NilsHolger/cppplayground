@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="sample\library.def" />
+    <None Include="sample\library.dll" />
     <None Include="sample\managed.cs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
