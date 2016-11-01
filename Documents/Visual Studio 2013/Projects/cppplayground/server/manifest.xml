@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+<assemblyIdentity type="win32" name="server" version="1.0.0.0"/>
+ 
+<file name="server.dll">
+<comClass clsid="{c155a74d-6b65-4301-80c8-d313c4443e05}" threadingModel="Free"/>
+  
+</file>
+</assembly>

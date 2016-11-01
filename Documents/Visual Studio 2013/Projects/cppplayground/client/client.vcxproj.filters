@@ -7,4 +7,7 @@
   <ItemGroup>
     <ClInclude Include="precompiled.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Xml Include="manifest.xml" />
+  </ItemGroup>
 </Project>
