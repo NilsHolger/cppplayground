@@ -77,8 +77,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="app1.cpp" />
+    <ClCompile Include="app2.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="debug.h" />
     <ClInclude Include="header.h" />
   </ItemGroup>
   <ItemGroup>
