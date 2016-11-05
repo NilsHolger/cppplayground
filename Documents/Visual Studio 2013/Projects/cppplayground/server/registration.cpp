@@ -5,24 +5,26 @@ using namespace OpenSourceOne;
 
 typedef invalid_handle Transaction;
 
-static Transaction CreateTransaction()
+Transaction CreateTransaction()
 {
-	return Transaction(CreateTransaction(nullptr,
-		nullptr,
+	return Transaction(CreateTransaction(nullptr, // default security descriptor
+		nullptr, // reserved
 		TRANSACTION_DO_NOT_PROMOTE,
-		0,
-		0,
+		0, // reserved
+		0, // reserved
 		INFINITE,
-		nullptr));
+		nullptr)); // description
 }
 
 struct RegistryKeyTraits
 {
 	typedef HKEY pointer;
+
 	static pointer invalid() throw()
 	{
 		return nullptr;
 	}
+
 	static void close(pointer value) throw()
 	{
 		HANDLE_VERIFY_(ERROR_SUCCESS, RegCloseKey(value));
@@ -31,55 +33,61 @@ struct RegistryKeyTraits
 
 typedef unique_handle<RegistryKeyTraits> RegistryKey;
 
-static RegistryKey CreateRegistryKey(HKEY key,
-									 wchar_t const * path,
-									 Transaction const & transaction,
-									 REGSAM access)
-{
-	HKEY handle = nullptr;
-	auto result = RegCreateKeyTransacted(key,
-		path,
-		0,
-		nullptr,
-		REG_OPTION_NON_VOLATILE,
-		access,
-		nullptr,
-		&handle,
-		nullptr,
-		transaction.get(),
-		nullptr);
-
-	if (ERROR_SUCCESS != result)
-	{
-		SetLastError(result);
-	}
-	return RegistryKey(handle);
-}
-
-static RegistryKey OpenRegistryKey(HKEY key,
+RegistryKey CreateRegistryKey(HKEY key,
 	wchar_t const * path,
 	Transaction const & transaction,
 	REGSAM access)
 {
 	HKEY handle = nullptr;
-	auto result = RegOpenKeyTransacted(key,
+
+	auto result = RegCreateKeyTransacted(key,
 		path,
-		0,
+		0, // reserved
+		nullptr, // class
+		REG_OPTION_NON_VOLATILE,
 		access,
+		nullptr, // default security descriptor
 		&handle,
+		nullptr, // disposition
 		transaction.get(),
-		nullptr);
+		nullptr); // reserved
 
 	if (ERROR_SUCCESS != result)
 	{
 		SetLastError(result);
 	}
+
+	return RegistryKey(handle);
+}
+
+RegistryKey OpenRegistryKey(HKEY key,
+	wchar_t const * path,
+	Transaction const & transaction,
+	REGSAM access)
+{
+	HKEY handle = nullptr;
+
+	auto result = RegOpenKeyTransacted(key,
+		path,
+		0, // reserved
+		access,
+		&handle,
+		transaction.get(),
+		nullptr); // reserved
+
+	if (ERROR_SUCCESS != result)
+	{
+		SetLastError(result);
+	}
+
 	return RegistryKey(handle);
 }
 
 enum class EntryOption
 {
-	None, Delete, FileName,
+	None,
+	Delete,
+	FileName,
 };
 
 struct Entry
@@ -97,22 +105,21 @@ static Entry Table[] =
 		L"Software\\Classes\\CLSID\\{c155a74d-6b65-4301-80c8-d313c4443e05}",
 		EntryOption::Delete,
 		nullptr,
-		L"Lion"
+		L"Hen"
 	},
 	{
 		L"Software\\Classes\\CLSID\\{c155a74d-6b65-4301-80c8-d313c4443e05}\\InprocServer32",
-		EntryOption::FileName,
+		EntryOption::FileName
 	},
 	{
 		L"Software\\Classes\\CLSID\\{c155a74d-6b65-4301-80c8-d313c4443e05}\\InprocServer32",
 		EntryOption::None,
 		L"ThreadingModel",
-		L"Free",
-
-	},
+		L"Free"
+	}
 };
 
-static bool Unregister(Transaction const & transaction)
+bool Unregister(Transaction const & transaction)
 {
 	for (auto const & entry : Table)
 	{
@@ -120,44 +127,52 @@ static bool Unregister(Transaction const & transaction)
 		{
 			continue;
 		}
+
 		auto key = OpenRegistryKey(HKEY_LOCAL_MACHINE,
 			entry.Path,
 			transaction,
 			DELETE | KEY_ENUMERATE_SUB_KEYS | KEY_QUERY_VALUE | KEY_SET_VALUE);
+
 		if (!key)
 		{
 			if (ERROR_FILE_NOT_FOUND == GetLastError())
 			{
 				continue;
 			}
+
 			return false;
 		}
-		auto result = RegDeleteTree(key.get(), nullptr);
+
+		auto result = RegDeleteTree(key.get(),
+			nullptr);
+
 		if (ERROR_SUCCESS != result)
 		{
 			SetLastError(result);
 			return false;
 		}
 	}
+
 	return true;
 }
 
-static bool Register(Transaction  const & transaction)
+bool Register(Transaction const & transaction)
 {
 	if (!Unregister(transaction))
 	{
 		return false;
 	}
 
-	wchar_t fileName[MAX_PATH];
+	wchar_t filename[MAX_PATH];
 
 	auto const length = GetModuleFileName(reinterpret_cast<HMODULE>(&__ImageBase),
-		fileName,
-		_countof(fileName));
-	if (0 == length || _countof(fileName) == length)
+		filename,
+		_countof(filename));
+
+	if (0 == length || _countof(filename) == length)
 	{
 		return false;
-	}										 
+	}
 
 	for (auto const & entry : Table)
 	{
@@ -170,38 +185,47 @@ static bool Register(Transaction  const & transaction)
 		{
 			return false;
 		}
-		if (EntryOption::FileName != entry.Option &&
-			!entry.Value)
+
+		if (EntryOption::FileName != entry.Option && !entry.Value)
 		{
 			continue;
 		}
 
 		auto value = entry.Value;
+
 		if (!value)
 		{
 			ASSERT(EntryOption::FileName == entry.Option);
-			value = fileName;
+			value = filename;
 		}
 
-		auto result = RegSetValueEx(key.get(), entry.Name, 0, REG_SZ, reinterpret_cast<BYTE const *>(value),
-			static_cast<DWORD>(sizeof(wchar_t)* (wcslen(value) + 1)));
+		auto result = RegSetValueEx(key.get(),
+			entry.Name,
+			0, // reserved
+			REG_SZ,
+			reinterpret_cast<BYTE const *>(value),
+			static_cast<DWORD>(sizeof(wchar_t) * (wcslen(value) + 1)));
+
 		if (ERROR_SUCCESS != result)
 		{
+			TRACE(L"RegSetValueEx failed %d\n", result);
 			SetLastError(result);
 			return false;
 		}
 	}
+
 	return true;
 }
-
 
 HRESULT __stdcall DllRegisterServer()
 {
 	auto transaction = CreateTransaction();
+
 	if (!transaction)
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
+
 	if (!Register(transaction))
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
@@ -218,11 +242,12 @@ HRESULT __stdcall DllRegisterServer()
 HRESULT __stdcall DllUnregisterServer()
 {
 	auto transaction = CreateTransaction();
+
 	if (!transaction)
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
-	
+
 	if (!Unregister(transaction))
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
@@ -232,7 +257,6 @@ HRESULT __stdcall DllUnregisterServer()
 	{
 		return HRESULT_FROM_WIN32(GetLastError());
 	}
+
 	return S_OK;
 }
-
-

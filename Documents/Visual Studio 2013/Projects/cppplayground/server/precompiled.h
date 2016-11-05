@@ -1,12 +1,11 @@
 #pragma once
 
-#include <windows.h>
+#include <Windows.h>
 #include <memory>
-#include <new>
-#include <ktmw32.h>
-#pragma comment(lib,"ktmw32.lib")
-
 
 #include <atlbase.h>
 #define ASSERT ATLASSERT
 #define TRACE ATLTRACE
+
+#include <ktmw32.h>
+#pragma comment(lib, "ktmw32.lib")

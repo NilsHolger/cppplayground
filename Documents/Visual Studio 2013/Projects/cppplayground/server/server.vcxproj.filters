@@ -14,7 +14,4 @@
   <ItemGroup>
     <None Include="exports.def" />
   </ItemGroup>
-  <ItemGroup>
-    <Xml Include="manifest.xml" />
-  </ItemGroup>
 </Project>
