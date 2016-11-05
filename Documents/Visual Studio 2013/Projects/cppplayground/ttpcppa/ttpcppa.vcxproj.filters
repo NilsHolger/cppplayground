@@ -3,6 +3,7 @@
   <ItemGroup>
     <ClCompile Include="app1.cpp" />
     <ClCompile Include="app2.cpp" />
+    <ClCompile Include="app3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="header.h" />
